@@ -4,11 +4,15 @@ import SignIng from './pages/SignIng';
 import SignOut from './pages/SignOut';
 import About from './pages/About';
 import Profile from './pages/Profile';
+import Header from './Components/Header';
 
 
 export default function App() {
   return (
       <BrowserRouter>
+      {/* Usar o header para todos o compontent */}
+
+      <Header/>
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/about' element={<About/>}/>
