@@ -1,7 +1,8 @@
 import User from '../Models/userModel.js';
 import bcryptjs from 'bcryptjs';
+import { errorHndler } from '../Utils/Error.js';
 
-export const signup = async(req, res) => {
+export const signup = async(req, res, next) => {
     //como salvar os dados no banco
     const { username, email, password } = req.body;
     //criptorafar a asenha
@@ -15,8 +16,8 @@ export const signup = async(req, res) => {
     try {
         await newUser.save();
         res.status(201).json('Usuario criado com sucesso!');
-    } catch (err) {
-        res.status(500).json(err.message)
+    } catch (error) {
+        next(errorHndler(500, "Existem um usuario com dados semelhantes"))
     }
 
 }

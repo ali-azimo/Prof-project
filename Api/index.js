@@ -28,3 +28,15 @@ app.listen(5000, () => {
 //Os routes deveriam esta qui, mas sao criados separados e importados aqui
 app.use('/api/user', userRouter)
 app.use('/api/auth', authRouter);
+
+//Apresentacao de erros intermediario
+//Utilizamos nos controladores
+app.use((err, req, res, next) => {
+    const statusCode = err.statusCode || 500;
+    const message = err.message || 'Erro no Servidor Interno';
+    return res.status(statusCode).json({
+        sucess: false,
+        statusCode,
+        message,
+    });
+});
